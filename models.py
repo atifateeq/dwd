@@ -2,10 +2,6 @@
 from mongoengine import *
 from datetime import datetime
 
-class log(Document):
-	text = StringField()
-	timestamp = DateTimeField(default=datetime.now())
-
 class Comment(EmbeddedDocument):
 	name = StringField()
 	comment = StringField()

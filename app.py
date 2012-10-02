@@ -27,19 +27,10 @@ categories = ['web','physical computing','software','video','music','installatio
 # this is our main page
 @app.route("/")
 def index():
-
-	log=models.log()
-	log.text = "yoyo"
-	log.save()
-
-	#get all logs
-	myLogs = models.Logs.objects()
-
 	# render the template, pass in the animals dictionary refer to it as 'animals'
 	templateData = {
 		'ideas' : models.Idea.objects(),
-		'categories' : categories,
-		'logs' : myLogs
+		'categories' : categories
 	}
 	return render_template("main.html", **templateData)
 
