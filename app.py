@@ -32,10 +32,14 @@ def index():
 	log.text = "yoyo"
 	log.save()
 
+	#get all logs
+	myLogs = models.Logs.objects()
+
 	# render the template, pass in the animals dictionary refer to it as 'animals'
 	templateData = {
 		'ideas' : models.Idea.objects(),
-		'categories' : categories
+		'categories' : categories,
+		'logs' : myLogs
 	}
 	return render_template("main.html", **templateData)
 
