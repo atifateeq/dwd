@@ -1,6 +1,13 @@
 # -*- coding: utf-8 -*-
 from mongoengine import *
+
+from flask.ext.mongoengine.wtf import model_form
 from datetime import datetime
+
+# our demo model from week 5 in class
+class Log(Document):
+	text = StringField()
+	timestamp = DateTimeField(default=datetime.now())
 
 class Comment(EmbeddedDocument):
 	name = StringField()
@@ -9,10 +16,10 @@ class Comment(EmbeddedDocument):
 
 class Idea(Document):
 
-	creator = StringField(max_length=120, required=True)
+	creator = StringField(max_length=120, required=True, verbose_name="First name")
 	title = StringField(max_length=120, required=True)
 	slug = StringField()
-	idea = StringField(required=True)
+	idea = StringField(required=True, verbose_name="What is your idea?")
 
 	# Category is a list of Strings
 	categories = ListField(StringField(max_length=30))
@@ -22,5 +29,10 @@ class Idea(Document):
 
 	# Timestamp will record the date and time idea was created.
 	timestamp = DateTimeField(default=datetime.now())
+
+
+# Create a Validation Form from the Idea model
+IdeaForm = model_form(Idea)
+
 	
 
