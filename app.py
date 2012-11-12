@@ -20,7 +20,7 @@ connect('mydata', host=os.environ.get('MONGOLAB_URI'))
 app.logger.debug("Connecting to MongoLabs")
 
 # hardcoded categories for the checkboxes on the form
-categories = ['web','physical computing','software','video','music','installation','assistive technology','developing nations','business','social networks']
+categories = ['sexy','web','physical computing','software','video','music','installation','assistive technology','developing nations','business','social networks']
 
 # --------- Routes ----------
 

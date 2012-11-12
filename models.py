@@ -17,9 +17,9 @@ class Comment(EmbeddedDocument):
 class Idea(Document):
 
 	creator = StringField(max_length=120, required=True, verbose_name="First name")
-	title = StringField(max_length=120, required=True)
+	title = StringField(max_length=120, required=False)
 	slug = StringField()
-	idea = StringField(required=True, verbose_name="What is your idea?")
+	idea = StringField(required=True, verbose_name="There isnt an app for...")
 
 	# Category is a list of Strings
 	categories = ListField(StringField(max_length=30))

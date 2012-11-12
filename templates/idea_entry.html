@@ -7,10 +7,7 @@
 
 	<!-- left column -->
 	<div class="span12">
-		<h2>IDEA: {{ idea.title }}</h2>
-		<p>By {{ idea.creator }}</p>
-		<hr>
-		<p>{{ idea.idea }}</p>
+		<h2>THERE ISNT AN APP FOR...<h2><h3>{{ idea.idea }}</h3>
 		<p>
 			<ul>
 			{% for c in idea.categories %}
@@ -19,7 +16,7 @@
 			</ul>
 		</p>
 
-		<p>added: {{ idea.timestamp }} | id: {{ idea.id }}</p>
+		<p>By {{ idea.creator }}</p>
 		
 		<hr>
 
