@@ -21,7 +21,7 @@ class Idea(Document):
 	title = StringField(max_length=120, required=False)
 	slug = StringField()
 	idea = StringField(required=True, verbose_name="")
-
+	role = StringField(choices=[('select','Select One'),('aid','Aid Organization'),('volunteer','Volunteer'),('victim','Victim')], verbose_name = "", help_text="What is your role?")
 	# Category is a list of Strings
 	categories = ListField(StringField(max_length=30))
 

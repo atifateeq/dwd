@@ -20,9 +20,11 @@ connect('mydata', host=os.environ.get('MONGOLAB_URI'))
 app.logger.debug("Connecting to MongoLabs")
 
 # hardcoded categories for the checkboxes on the form
-categories = ['sexy','web','physical computing','software','video','music','installation','assistive technology','developing nations','business','social networks']
+categories = ['web','physical computing','software','video','music','installation','assistive technology','developing nations','business','social networks']
 
 # --------- Routes ----------
+
+
 
 # this is our main page
 @app.route("/", methods=['GET','POST'])
@@ -35,17 +37,22 @@ def index():
 	if request.method == "POST" and idea_form.validate():
 	
 		# get form data - create new idea
+
 		idea = models.Idea()
+		idea.role = request.form.get('role','')
+		idea.contact = request.form.get('contact','')
 		idea.creator = request.form.get('creator','anonymous')
 		idea.title = request.form.get('title','no title')
 		idea.slug = slugify(idea.title + " " + idea.creator)
 		idea.idea = request.form.get('idea','')
-		idea.categories = request.form.getlist('categories') # getlist will pull multiple items 'categories' into a list
+
+		#idea.categories = request.form.getlist('categories') # getlist will pull multiple items 'categories' into a list
 		
 		idea.save() # save it
 
 		# redirect to the new idea page
-		return redirect('/ideas/%s' % idea.slug)
+		return redirect('/') 
+		# return render_template("main.html")
 
 	else:
 
@@ -57,9 +64,28 @@ def index():
 			for c in request.form.getlist('categories'):
 				idea_form.categories.append_entry(c)
 
+		allPeople = models.Idea.objects.order_by("-timestamp")# pull all people from database
+
+		# temporary containers for types of people
+		victims = []
+		aids = []
+		volunteers = []
+
+		# loop through all people and put in correct container
+		for p in allPeople:
+
+			if p.role == 'volunteer':
+				volunteers.append(p)
+			elif p.role == 'aid':
+				aids.append(p)
+			elif p.role == 'victim':
+				victims.append(p)
+
 		# render the template
 		templateData = {
-			'ideas' : models.Idea.objects(),
+			'victims' : victims,
+			'aids' : aids,
+			'volunteers' : volunteers,
 			'categories' : categories,
 			'form' : idea_form
 		}

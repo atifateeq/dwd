@@ -5,68 +5,20 @@
 {% block body %}
 
 		<form method="POST" action="/">
-			<h3>I am a <select name="role">
-			<option value="select">Select One</option>
-  			<option value="aid">Aid Organization</option>
-  			<option value="victim">Victim</option>
-  			<option value="volunteer">Volunteer</option>
-			</select> named {{ form.creator(class='myTextboxCssClass') }} and I 			{{ render_textarea(form.idea, cols="50", rows="1") }} {# render_textarea inside _form_helpers.html #} <br> 
+			<h3>I am a {{ form.role.label(class='myLabelCssClass') }}{{ form.role(class='myTextboxCssClass', type='text') }} named {{ form.creator(class='myTextboxCssClass') }} and I {{ render_textarea(form.idea, cols="50", rows="1") }} {# render_textarea inside _form_helpers.html #} <br> 
 			contact me here {{ form.contact(class='myTextboxCssClass') }}. <button type="submit" class="btn btn-primary">Submit</button>
-
-
-
 		</h3>
-
-			<!-- {{ form.creator.label(class='myLabelCssClass') }} -->
-			
-			
-			<!-- 
-			<label for="creator">First Name</label>
-			<input type="text" id="creator" name="creator" value="{{ form.creator }}"> -->
-			
-<!-- 			{{ form.title.label(class='myLabelCssClass') }}
-			{{ form.title(class='myTextboxCssClass') }}
-			
-			
-			<label for="title">Project Titlee</label>
-			<input type="text" id="title" name="title"> -->
-			
-			<!--  form.idea.label }} -->
-			
-
-			
-<!-- 			<label>Category</label>
-			<span class="help-block">Select as many as you need.</span>
-
-			
-			{# comment - loop through categories and create checkboxes #}
-			{% for c in categories|sort %}
-			<label class="checkbox">
-			<input type="checkbox" name="categories" value="{{ c|replace(" ","_") }}" {% if c|replace(" ","_") in form.categories.data %}checked=checked{% endif %} > {{ c|title }}
-			</label>
-			{% endfor %} -->
-
-
-			
-		</form>
-
-
-
+	</form>
 
 <div class="span12">
 	<div class="span4">
 		
 		<h3>Support/Help</h3>
 
-		{% for idea in ideas %}
-			<h4><a href="/ideas/{{ idea.slug }}">{{ idea.idea }}</a></h4>
-			<p>by {{ idea.creator }}</p>
-			<!-- <p>
-			{% for cat in idea.categories %}
-				<span class="label label-inverse"><a href="/category/{{ cat}}">{{ cat|replace("_"," ")}}</a></span>
-			{% endfor %}
-			<a class="label" href="/ideas/{{ idea.slug }}/edit">edit</a>
-			</p> -->
+		{% for a in aids %}
+			<h4>{{ a.idea }}</h4>
+			<p>by {{ a.creator }} <br>Contact Info : {{a.contact}}</p>
+			<a href="/ideas/{{ a.slug }}">Respont to this message</a>
 			
 			<hr/>
 		{% endfor %}
@@ -77,47 +29,29 @@
 		
 		<h3>Victims</h3>
 
-		{% for idea in ideas %}
-			<h4><a href="/ideas/{{ idea.slug }}">{{ idea.idea }}</a></h4>
-			<p>by {{ idea.creator }}</p>
-			<!-- <p>
-			{% for cat in idea.categories %}
-				<span class="label label-inverse"><a href="/category/{{ cat}}">{{ cat|replace("_"," ")}}</a></span>
-			{% endfor %}
-			<a class="label" href="/ideas/{{ idea.slug }}/edit">edit</a>
-			</p> -->
-			
+		{% for v in victims %}
+			<h4><a href="/ideas/{{ v.slug }}">{{ v.idea }}</a></h4>
+			<p>by {{ v.creator }}</p>
 			<hr/>
 		{% endfor %}
 		
 	</div>
 
-
-
 	<div class="span4">
 		
 		<h3>Volunteers</h3>
 
-		{% for idea in ideas %}
-			<h4><a href="/ideas/{{ idea.slug }}">{{ idea.idea }}</a></h4>
-			<p>by {{ idea.creator }}</p>
-			<!-- <p>
-			{% for cat in idea.categories %}
-				<span class="label label-inverse"><a href="/category/{{ cat}}">{{ cat|replace("_"," ")}}</a></span>
-			{% endfor %}
-			<a class="label" href="/ideas/{{ idea.slug }}/edit">edit</a>
-			</p> -->
-			
+		{% for v in volunteers %}
+			<h4><a href="/ideas/{{ v.slug }}">{{ v.idea }}</a></h4>
+			<p>by {{ v.creator }}</p>
+			<p>{{ v.timestamp }}</p>
 			<hr/>
 		{% endfor %}
 		
 	</div></div>
 
-	
-
 
 {% endblock %}
-
 
 {% block styles %}{% endblock %}
 {% block scripts %}{% endblock %}
