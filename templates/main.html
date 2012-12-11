@@ -5,8 +5,14 @@
 {% block body %}
 
 		<form method="POST" action="/">
-			<h3>I am a {{ form.role.label(class='myLabelCssClass') }}{{ form.role(class='myTextboxCssClass', type='text') }} named {{ form.creator(class='myTextboxCssClass') }} and I {{ render_textarea(form.idea, cols="50", rows="1") }} {# render_textarea inside _form_helpers.html #} <br> 
-			contact me here {{ form.contact(class='myTextboxCssClass') }}. <button type="submit" class="btn btn-primary">Submit</button>
+			<h3><center>Category {{ form.role.label(class='myLabelCssClass') }}{{ form.role(class='myTextboxCssClass', type='text') }}
+			<br>Name<br>
+			 {{ form.creator(class='myTextboxCssClass') }}
+			 <br>Message <br>
+			 {{ render_textarea(form.idea, cols="50", rows="10") }} {# render_textarea inside _form_helpers.html #}
+			 <br>Contact Info <br>
+			{{ form.contact(class='myTextboxCssClass') }}<br>	
+			<button type="submit" class="btn btn-primary">Submit</button></center>
 		</h3>
 	</form>
 
@@ -17,8 +23,10 @@
 
 		{% for a in aids %}
 			<h4>{{ a.idea }}</h4>
-			<p>by {{ a.creator }} <br>Contact Info : {{a.contact}}</p>
-			<a href="/ideas/{{ a.slug }}">Respond to this message</a>
+			<p>by {{ a.creator }} <br>Contact : {{a.contact}}
+			<a href="/ideas/{{ a.slug }}"><br>Respond</a> ({{ a.comments|length }})
+			<!-- <p>{{ a.timestamp }}</p> --></p>
+			
 			
 			<hr/>
 		{% endfor %}
@@ -30,8 +38,10 @@
 		<h3>Victims</h3>
 
 		{% for v in victims %}
-			<h4><a href="/ideas/{{ v.slug }}">{{ v.idea }}</a></h4>
-			<p>by {{ v.creator }}</p>
+			<h4>{{ v.idea }}</h4>
+			<p>by {{ v.creator }} <br>Contact : {{v.contact}}
+			<a href="/ideas/{{ v.slug }}"><br>Respond</a> ({{ v.comments|length }})
+			</p>
 			<hr/>
 		{% endfor %}
 		
@@ -42,9 +52,10 @@
 		<h3>Volunteers</h3>
 
 		{% for v in volunteers %}
-			<h4><a href="/ideas/{{ v.slug }}">{{ v.idea }}</a></h4>
-			<p>by {{ v.creator }}</p>
-			<p>{{ v.timestamp }}</p>
+			<h4>{{ v.idea }}</h4>
+			<p>by {{ v.creator }} <br>Contact : {{v.contact}}
+			<a href="/ideas/{{ v.slug }}"><br>Respond</a> ({{ v.comments|length }})
+			</p>
 			<hr/>
 		{% endfor %}
 		
